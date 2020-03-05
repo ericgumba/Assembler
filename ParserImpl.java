@@ -7,6 +7,7 @@ import java.io.IOException;
 public class ParserImpl implements Parser {
     FileReader fr;
     BufferedReader br;
+    String command;
 
     public ParserImpl(File asmFile) throws FileNotFoundException {
 
@@ -25,13 +26,21 @@ if hasMoreCommands() is true.
 Initially there is no current command. */
     @Override
     public void advance() throws IOException { 
-            String line = br.readLine();
-            line.trim();
-            line=line.replaceAll("\\s+", ""); // replace whitespace
-            line=line.replaceAll("//.*", ""); // replace comment 
-            while (line.length() == 0){
-                line = br.readLine();
-            } 
+
+        if (hasMoreCommands()){
+            command = br.readLine();
+            command.trim();
+            command=command.replaceAll("\\s+", ""); // replace whitespace
+            command=command.replaceAll("//.*", ""); // replace comment 
+            if (command.length() == 0){ 
+                advance();
+            } else{
+            System.out.println(command);
+            }
+        }else{
+            System.out.print("you suck");
+        }
+
     }
 
     /*Returns the type of the current
@@ -47,9 +56,19 @@ command) for (Xxx) where Xxx
 
 is a symbol.*/
     @Override
-    public Command commandType() {
-        // TODO Auto-generated method stub
-        return null;
+    public Command commandType() { 
+
+        if ( command.startsWith("@") ){
+            System.out.println(Command.A_COMMAND);
+            return Command.A_COMMAND;
+        } else if ( command.startsWith("(") ){
+            System.out.println(Command.L_COMMAND);
+            return Command.L_COMMAND;
+        } else {
+            System.out.println(Command.C_COMMAND);
+            return Command.C_COMMAND;
+        } 
+
     }
 
     @Override
@@ -77,8 +96,41 @@ is a symbol.*/
     }
 
     public static void main(String[] args) throws IOException { 
-
-
+ 
+        Parser p = new ParserImpl(new File("asd.asm"));
+ 
+        p.advance();  
+        p.commandType();
+        p.advance();   
+        p.commandType();  
+        p.advance();      
+        p.commandType();     
+        p.advance();    
+        p.commandType();
+        p.advance();     
+        p.commandType();
+        p.advance();  
+        p.commandType();
+        p.advance();    
+        p.commandType();
+        p.advance();     
+        p.commandType();
+        p.advance();      
+        p.commandType();     
+        p.advance();    
+        p.commandType();
+        p.advance();     
+        p.commandType();
+        p.advance();      
+        p.commandType();     
+        p.advance();    
+        p.commandType();
+        p.advance();     
+        p.commandType();
+        p.advance();    
+        p.commandType();
+        p.advance();   
+        p.commandType();  
     }
     
 }
