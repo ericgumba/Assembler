@@ -34,11 +34,7 @@ Initially there is no current command. */
             command=command.replaceAll("//.*", ""); // replace comment 
             if (command.length() == 0){ 
                 advance();
-            } else{
-            System.out.println(command);
-            }
-        }else{
-            System.out.print("you suck");
+            }  
         }
 
     }
@@ -58,19 +54,17 @@ is a symbol.*/
     @Override
     public Command commandType() { 
 
-        if ( command.startsWith("@") ){
-            System.out.println(Command.A_COMMAND);
+        if ( command.startsWith("@") ){ 
             return Command.A_COMMAND;
-        } else if ( command.startsWith("(") ){
-            System.out.println(Command.L_COMMAND);
+        } else if ( command.startsWith("(") ){ 
             return Command.L_COMMAND;
-        } else {
-            System.out.println(Command.C_COMMAND);
+        } else { 
             return Command.C_COMMAND;
         } 
 
     }
 
+    // dest = comp;jump
     @Override
     public String symbol() {
         // TODO Auto-generated method stub
@@ -80,57 +74,38 @@ is a symbol.*/
     @Override
     public String dest() {
         // TODO Auto-generated method stub
+
+        if (commandType() == Command.C_COMMAND ){
+            if ( command.contains("=") ){
+                return String.valueOf( command.charAt(0) );
+            } 
+        }
         return null;
     }
 
+    // dest = comp;jump
     @Override
     public String comp() {
         // TODO Auto-generated method stub
+        if (commandType() == Command.C_COMMAND ){
+            if ( command.contains(";") ){
+                return String.valueOf( command.charAt(0) );
+            } 
+        }
         return null;
     }
 
     @Override
     public String jump() {
         // TODO Auto-generated method stub
+        if (commandType() == Command.C_COMMAND ){
+            if ( command.contains(";") ){
+                return command.substring(2, 5);
+            } 
+        } 
+
         return null;
     }
-
-    public static void main(String[] args) throws IOException { 
  
-        Parser p = new ParserImpl(new File("asd.asm"));
- 
-        p.advance();  
-        p.commandType();
-        p.advance();   
-        p.commandType();  
-        p.advance();      
-        p.commandType();     
-        p.advance();    
-        p.commandType();
-        p.advance();     
-        p.commandType();
-        p.advance();  
-        p.commandType();
-        p.advance();    
-        p.commandType();
-        p.advance();     
-        p.commandType();
-        p.advance();      
-        p.commandType();     
-        p.advance();    
-        p.commandType();
-        p.advance();     
-        p.commandType();
-        p.advance();      
-        p.commandType();     
-        p.advance();    
-        p.commandType();
-        p.advance();     
-        p.commandType();
-        p.advance();    
-        p.commandType();
-        p.advance();   
-        p.commandType();  
-    }
     
 }
