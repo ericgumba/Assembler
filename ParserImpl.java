@@ -91,6 +91,9 @@ is a symbol.*/
             if ( command.contains(";") ){
                 return String.valueOf( command.charAt(0) );
             } 
+            if (command.contains("=") ){
+                return command.replaceAll(".*=", "");
+            }
         }
         return null;
     }
@@ -105,6 +108,22 @@ is a symbol.*/
         } 
 
         return null;
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            
+        Parser p = new ParserImpl(new File("asd.asm"));
+        while( p.hasMoreCommands() ){
+            p.advance();
+            System.out.println(p.comp());
+        }
+
+        } catch (Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        } 
     }
  
     
