@@ -23,10 +23,14 @@ public class CodeImpl implements Code {
         compA.put("D&M", "000000");
         compA.put("D|M", "010101");
 
-        HashMap<String, String> dest = new HashMap<String, String>();
-        dest.put("A", "");
-        dest.put("M", "");
-        dest.put("D", "");
+        HashMap<String, String> jump = new HashMap<String, String>();
+        jump.put("JGT", "001");
+        jump.put("JEQ", "010");
+        jump.put("JGE", "011");
+        jump.put("JLT", "100");
+        jump.put("JNE", "101");
+        jump.put("JLE", "110");
+        jump.put("JMP", "111");
     }
 
     @Override
