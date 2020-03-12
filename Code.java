@@ -1,7 +1,5 @@
-import java.util.BitSet;
-
 interface Code { 
-    BitSet dest(String mnemonic);
-    BitSet comp(String mnemonic);
-    BitSet jump(String mnemonic);
+    String dest(String mnemonic);
+    String comp(String mnemonic);
+    String jump(String mnemonic);
 }
