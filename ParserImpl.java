@@ -66,14 +66,15 @@ is a symbol.*/
 
     // dest = comp;jump
     @Override
-    public String symbol() {
-        // TODO Auto-generated method stub
+    public String symbol() { 
+        if ( commandType() == Command.A_COMMAND ){
+            return "fuck";
+        }
         return null;
     }
 
     @Override
-    public String dest() {
-        // TODO Auto-generated method stub
+    public String dest() { 
 
         if (commandType() == Command.C_COMMAND ){
             if ( command.contains("=") ){
@@ -85,8 +86,7 @@ is a symbol.*/
 
     // dest = comp;jump
     @Override
-    public String comp() {
-        // TODO Auto-generated method stub
+    public String comp() { 
         if (commandType() == Command.C_COMMAND ){
             if ( command.contains(";") ){
                 return String.valueOf( command.charAt(0) );
@@ -99,8 +99,7 @@ is a symbol.*/
     }
 
     @Override
-    public String jump() {
-        // TODO Auto-generated method stub
+    public String jump() { 
         if (commandType() == Command.C_COMMAND ){
             if ( command.contains(";") ){
                 return command.substring(2, 5);
@@ -108,6 +107,10 @@ is a symbol.*/
         } 
 
         return null;
+    }
+    @Override
+    public String getCommand(){
+        return command;
     }
 
     public static void main(String[] args) {
@@ -120,8 +123,7 @@ is a symbol.*/
             System.out.println(p.comp());
         }
 
-        } catch (Exception e) {
-            //TODO: handle exception
+        } catch (Exception e) { 
             e.printStackTrace();
         } 
     }

@@ -71,10 +71,10 @@ public class CodeImpl implements Code {
     @Override 
     public String comp(String mnemonic){
         if ( mnemonic.contains("M")){
-            return compA.get(mnemonic);
+            return "111"+compA.get(mnemonic);
         }
 
-        return compNA.get(mnemonic);
+        return "011"+compNA.get(mnemonic);
     }
 
     @Override

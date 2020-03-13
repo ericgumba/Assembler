@@ -8,4 +8,5 @@ interface Parser {
     String dest();
     String comp();
     String jump();
+	String getCommand();
 }
