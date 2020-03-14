@@ -14,7 +14,7 @@ public class CodeImpl implements Code {
         
 
         compA = new HashMap<String, String>();
-        compA.put("M", " 110000");
+        compA.put("M", "110000");
         compA.put("!M",  "110001");
         compA.put("-M",  "110011");
         compA.put("M+1", "110111");
@@ -71,10 +71,10 @@ public class CodeImpl implements Code {
     @Override 
     public String comp(String mnemonic){
         if ( mnemonic.contains("M")){
-            return "111"+compA.get(mnemonic);
+            return "1111"+compA.get(mnemonic);
         }
 
-        return "011"+compNA.get(mnemonic);
+        return "1110"+compNA.get(mnemonic);
     }
 
     @Override

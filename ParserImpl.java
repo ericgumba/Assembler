@@ -68,8 +68,9 @@ is a symbol.*/
     @Override
     public String symbol() { 
         if ( commandType() == Command.A_COMMAND ){
-            return "fuck";
+            return command.replaceAll("@", ""); 
         }
+
         return null;
     }
 
