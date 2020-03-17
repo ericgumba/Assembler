@@ -11,6 +11,10 @@ public class CodeImpl implements Code {
         dest.put("A", "100");
         dest.put("M", "001");
         dest.put("D", "010");
+        dest.put("AM", "101");
+        dest.put("AD", "110");
+        dest.put("AMD", "111");
+        dest.put("MD", "011");
         
 
         compA = new HashMap<String, String>();

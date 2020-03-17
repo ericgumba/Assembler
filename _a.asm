@@ -1,0 +1,8 @@
+@OUTPUT_FIRST
+
+@A
+
+
+@B
+@C
+@D

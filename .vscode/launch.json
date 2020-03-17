@@ -5,6 +5,13 @@
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "Main",
+            "projectName": "assembler_f6dc777a"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "Main",
             "projectName": "Assembler_281b6f3a"
         },
         {

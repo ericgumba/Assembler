@@ -71,15 +71,21 @@ is a symbol.*/
             return command.replaceAll("@", ""); 
         }
 
+        if ( commandType() == Command.L_COMMAND){ 
+            command = command.replaceAll("\\)", "");   
+            return command.replaceAll("\\(", ""); 
+        }
+
+            
+
         return null;
     }
 
     @Override
     public String dest() { 
-
         if (commandType() == Command.C_COMMAND ){
             if ( command.contains("=") ){
-                return String.valueOf( command.charAt(0) );
+                return command.replaceAll("=.*", "");
             } 
         }
         return null;
@@ -115,18 +121,9 @@ is a symbol.*/
     }
 
     public static void main(String[] args) {
+        String a = "AM=DAWDOIWUDYH(W*&878";
+        System.out.println(a.replaceAll("=.*", ""));
 
-        try {
-            
-        Parser p = new ParserImpl(new File("asd.asm"));
-        while( p.hasMoreCommands() ){
-            p.advance();
-            System.out.println(p.comp());
-        }
-
-        } catch (Exception e) { 
-            e.printStackTrace();
-        } 
     }
  
     
