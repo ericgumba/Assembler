@@ -6,6 +6,8 @@ public class Main {
     static Parser p;
     static FileWriter fw;
     static SymbolTable st;
+    static Code c;
+    static int address = 15;
 
     public static void firstPass( ) throws IOException {
 
@@ -28,36 +30,54 @@ public class Main {
         return binary;
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("x");
+    public static String handleSymbol( String symbol){
+ 
 
-        p = new ParserImpl(new File("Max.asm"));
-        fw = new FileWriter("Max.hack");
+        String nonSymbol = symbol.replace("R", ""); 
+        if (nonSymbol.matches("\\d+") ){ 
+            return to16Binary( Integer.parseInt( nonSymbol ));
+        }
+        if ( st.contains(symbol) ){
+            return to16Binary( st.getAddress(symbol) );
+        }
+        address += 1;
+        
+        System.out.println(symbol + "  " + String.valueOf(address) );
+
+        st.addEntry(symbol, address);
+        return to16Binary(address); 
+    }
+
+    public static String processCommand(){
+
+        if (p.symbol() != null) { 
+                    
+            return handleSymbol( p.symbol() );           
+        } else {
+            return c.comp(p.comp()) + c.dest(p.dest()) + c.jump( p.jump() ); 
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        p = new ParserImpl(new File("Pong.asm"));
+        fw = new FileWriter("Pong.hack");
         st = new SymbolTableImpl();
         firstPass();
-        p = new ParserImpl(new File("Max.asm"));
+        p = new ParserImpl(new File("Pong.asm"));
 
-        Code c = new CodeImpl();
-        int baseAdd = 16;
-        // while(p.hasMoreCommands()){
+        c = new CodeImpl();
 
-        //     String lineToWrite = "";
-        //     p.advance();
-        //     if (p.symbol() != null) { 
-        //         int i = Integer.parseInt( p.symbol() );
-        //         String binary = Integer.toBinaryString(i);
-        //         int zeroes = 16 - binary.length();
+        while(p.hasMoreCommands()){
+            String lineToWrite = "";
+            p.advance();
 
-        //         for(int index = 0; index < zeroes; index++) { binary =  "0" + binary; }
+            if ( p.commandType() != Command.L_COMMAND ){
+                lineToWrite = processCommand();
+                fw.write(lineToWrite + "\n");
+            } 
 
-        //         lineToWrite = binary;
-                                
-        //     } else {
-        //         lineToWrite = c.comp(p.comp()) + c.dest(p.dest()) + c.jump( p.jump() ); 
-
-        //     } 
-        //     fw.write(lineToWrite + "\n");
-        // }
+        }
         fw.close();
     }
 
